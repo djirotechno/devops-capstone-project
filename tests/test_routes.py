@@ -149,6 +149,7 @@ class TestAccountService(TestCase):
         self.assertEqual(len(data), 5)
     def test_update_account(self):
         """It should Update an existing Account"""
+        global BASE_URL
         # create an Account to update
         test_account = AccountFactory()
         resp = self.client.post(BASE_URL, json=test_account.serialize())
