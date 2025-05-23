@@ -17,7 +17,7 @@ DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgresql://postgres:postgres@localhost:5432/postgres"
 )
 
-global BASE_URL = "/accounts"
+
 
 
 ######################################################################
@@ -149,7 +149,7 @@ class TestAccountService(TestCase):
         self.assertEqual(len(data), 5)
     def test_update_account(self):
         """It should Update an existing Account"""
-        global BASE_URL
+        BASE_URL = "/accounts"
         # create an Account to update
         test_account = AccountFactory()
         resp = self.client.post(BASE_URL, json=test_account.serialize())
@@ -164,7 +164,7 @@ class TestAccountService(TestCase):
         self.assertEqual(updated_account["name"], "Something Known")
     def test_delete_account(self):
         """It should Delete an Account"""
-        global BASE_URL
+        BASE_URL = "/accounts"
         account = self._create_accounts(1)[0]
         resp = self.client.delete(f"{BASE_URL}/{account.id}")
         self.assertEqual(resp.status_code, status.HTTP_204_NO_CONTENT)
